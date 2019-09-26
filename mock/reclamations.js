@@ -1,0 +1,53 @@
+const reclamations = {
+  content: [
+    {
+      id: 3141549,
+      numeroDeclaraion: 11909740,
+      typeDocument: '022',
+      codeIntermediaire: '9106',
+      dateSaisie: '12/09/2014',
+      dateTraitement: '19/09/2014',
+      commentaire:
+        'Bonjour,\n\nPriere d activer le reglement de ce dossier dans la cadre du plafond supplementaire\n\nPar avance, je vous remercie',
+      emetteur: '9106',
+      notif: 'L',
+      numeroContrat: 363400,
+      categorie: 60,
+      numeroAdherent: 2180245,
+      nomAdherent: 'MACHRAT ABDERRAHMANE',
+      numeroClient: '1793',
+      commentaireBackOffice: 'Dossier en cours de traitement',
+      destinataire: null,
+      etatId: null,
+      typeEmetteur: null,
+    },
+    {
+      id: 3177382,
+      numeroDeclaraion: 10838893,
+      typeDocument: '022',
+      codeIntermediaire: '9106',
+      dateSaisie: '01/07/2019',
+      dateTraitement: null,
+      commentaire: 'test',
+      emetteur: '9106',
+      notif: null,
+      numeroContrat: 363400,
+      categorie: 60,
+      numeroAdherent: 5606527,
+      nomAdherent: 'BENSLIMANE  NEZHA',
+      numeroClient: '1793',
+      commentaireBackOffice: null,
+      destinataire: null,
+      etatId: null,
+      typeEmetteur: null,
+    },
+  ],
+  page: 0,
+  size: 10,
+  totalPages: 1,
+  totalElements: 2,
+};
+
+export default {
+  'POST /mock/reclamations': reclamations,
+};
