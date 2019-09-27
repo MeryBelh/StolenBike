@@ -10,7 +10,7 @@ export default {
   menu: {
     locale: true,
   },
-  title: 'Wafa Santé',
+  title: 'Stolen bikes',
   pwa: false,
   iconfontUrl: '',
 };

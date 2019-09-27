@@ -11,14 +11,14 @@ const SelectLang = props => {
 
   const changeLang = ({ key }) => setLocale(key, false);
 
-  const locales = ['fr-FR' /*'en-US',*/];
+  const locales = [/*'fr-FR',*/ 'en-US'];
   const languageLabels = {
-    'fr-FR': 'Francais',
-    //'en-US': 'English',
+    //'fr-FR': 'Francais',
+    'en-US': 'English',
   };
   const languageIcons = {
-    'fr-FR': 'FR',
-    //'en-US': '🇬🇧',
+    //'fr-FR': 'FR',
+    'en-US': 'EN',
   };
   const langMenu = (
     <Menu className={styles.menu} selectedKeys={[selectedLang]} onClick={changeLang}>

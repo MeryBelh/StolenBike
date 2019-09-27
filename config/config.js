@@ -134,13 +134,13 @@ export default {
     'layout-sider-background': '#00182E',
     'layout-body-background': '#f0f2f5',
   },
-  // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
-  //   },
-  // },
+ proxy: {
+   '/server/api/': {
+       target: 'https://localhost:3000',
+       changeOrigin: true,
+       pathRewrite: { '^/server': '' },
+   },
+ },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,

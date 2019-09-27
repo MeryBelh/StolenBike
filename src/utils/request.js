@@ -23,9 +23,7 @@ const codeMessage = {
   503: 'The service is unavailable and the server is temporarily overloaded or maintained.',
   504: 'The gateway timed out.',
 };
-/**
- * 异常处理程序
- */
+
 
 const errorHandler = error => {
   console.log(error);
@@ -45,16 +43,16 @@ const errorHandler = error => {
 
 const rootUrls = {
   mock: 'http://localhost:8000/mock',
-  local: 'http://192.168.112.109:8063',
-  remote: 'http://192.168.1.236:8765/wa/api/v1/dim',
+  local: 'http://localhost:3000',
+  //remote: 'http://192.168.1.236:8765/wa/api/v1/dim',
 };
 
 // const token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJncm91cE5hbWVzIjpbXSwic3ViIjoiOTYyMiIsInVzZXJfbmFtZSI6Ijk2MjIiLCJzY29wZSI6WyJkaW06KiIsInVhYTphcGk6cmVnaXN0ZXIiLCJ1YWE6YXBpOioiLCJ1YWc6KiJdLCJpc3MiOiJ3ZmE6dWFhOmVudGVycHJpc2UtdXNlciIsImV4cCI6MTU2ODY1MzkwNiwiY29kZUludGVybWVkaWFpcmUiOm51bGwsImF1dGhvcml0aWVzIjpbIlJPTEVfV0FGQV9VU0VSIiwiUk9MRV9TQU5URV9QUkVTVEFUQUlSRSJdLCJqdGkiOiIzYzA4YTY0YS1mOTMzLTQyYmEtYjFkOC1lOWUxOGE2NzVlMDQiLCJlbWFpbCI6Ijk2MjJAV2FmYWFzc3VycmFuY2VkZXYubG9jYWwiLCJjbGllbnRfaWQiOiJ3ZmEud2EuZGltIn0.BpfdmUQC6IILVpFBXoa1NimEJb9C_-GeJd2jXtmb_1B0-BXF-kcw70nv-UY7dFpEUHY2sDO-5ysEXm2P2SH_tvrLiwCCIFp0995H7Kp2N8xyOKLlelvEl8jaxsS0A686RPpWAwXIp2uL1JR1EZaUTck4GSex2_BuObKlOA4pbsG0SLbbNFMuuGZZbRK4DG1hjawAgsSkJDLFVFXQF5V669Vyk2DcH2ai-S0iU35Xviv4_nQVa6aKPo2zKE5XqR21qFJq76WHaI0lFhj-acV7Wi8wbAPjiNZ2Mo4WbZ0G5AfoQuEjs4aZzw_o4EIWcLbmk3kafW0sPvlGyoz9K1k9sA'
 const request = () => {
   return extend({
     errorHandler,
-    prefix: rootUrls.remote,
-     headers: { Authorization: `Bearer ${getAccessToken()}` },
+    prefix: rootUrls.local,
+     headers: { 'Access-Control-Allow-Origin': rootUrls.local },
     // 默认错误处理
     // TODO : remove this comment
     // credentials: 'include', // 默认请求是否带上cookie
