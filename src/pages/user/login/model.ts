@@ -3,7 +3,7 @@ import { AnyAction, Reducer } from 'redux';
 import { EffectsCommandMap } from 'dva';
 import { deleteTokenInformation, persistTokenInformation } from '@/pages/user/login/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
-import { fetchToken } from '@/services/user';
+import { autheticate } from '@/services/user';
 
 export interface IStateType {
   status?: 'ok' | 'error';
@@ -35,13 +35,16 @@ const Model: ModelType = {
   },
 
   effects: {
-    *login({ payload }, { call, put }) {
-      const token = yield call(fetchToken, payload);
-      const result = token
-        ? { status: 'ok', currentAuthority: 'admin' }
-        : { status: 'error', currentAuthority: 'guest' };
-      if (token) {
-        yield persistTokenInformation(token);
+    
+    *login({ payload }, { call, put }) {      
+      const policeOfficer = yield call(autheticate, payload);
+
+      const result = policeOfficer.length
+      ? { status: 'ok', currentAuthority: 'admin' }
+      : { status: 'error', currentAuthority: 'guest' };
+        
+      if (policeOfficer.length !== 0) {
+        yield persistTokenInformation(policeOfficer);
         reloadAuthorized();
         yield router.push('/');
       }
@@ -50,6 +53,7 @@ const Model: ModelType = {
         payload: result,
       });
     },
+
     *logout({ payload }, { call, put }) {
       yield deleteTokenInformation();
       router.push('/');

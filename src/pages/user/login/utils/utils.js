@@ -6,23 +6,14 @@ import router from 'umi/router';
 
 function* persistTokenInformation(token) {
 
-  const { access_token, expires_in } = token;
+  const { id, login } = token;
 
 
-  yield localStorage.setItem('access-token', JSON.stringify(access_token));
+  yield localStorage.setItem('access-token', JSON.stringify(id));
   yield localStorage.setItem(
     'token-valid-until',
     JSON.stringify(moment().valueOf() + expires_in * 1000),
   );
-
-  const { authorities } = decode(access_token);
-  const indexOfRolePrestataitre = authorities.indexOf('ROLE_SANTE_PRESTATAIRE')
-  if(indexOfRolePrestataitre > -1)
-  {
-    const {typePrestataire} = yield getPrestataireConnecte()
-    authorities.push( typePrestataire)
-  }
-  setAuthority(authorities);
 }
 
 function deleteTokenInformation() {
@@ -32,7 +23,6 @@ function deleteTokenInformation() {
 }
 
 function getAccessToken (){
-
 
   const validUntil = localStorage.getItem('token-valid-until') || 0;
   const now = moment().valueOf();

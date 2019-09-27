@@ -42,3 +42,19 @@ export async function refreshToken(token) {
 export async function getPrestataireConnecte() {
   return request()('/prestataires/prestataireConnecte');
 }
+
+
+
+
+export function autheticate(params) {
+  const { userName, password } = params;
+  const payload = {
+    'login': userName,
+    'passwd':password
+  }
+  return request()('/policeofficers/authenticate', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+     headers: { 'Content-Type': 'application/json'} ,
+  });
+}
