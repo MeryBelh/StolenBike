@@ -1,17 +1,18 @@
 //import { fetchDeclarations } from '../../../services/bordereau';
-import declarationMapper from './mapper';
+import stolenBikeCasesMapper from './mapper';
 import DataSource from '../../../utils/DataSource';
 
 export default {
   namespace: 'stolenBikeCases',
   state: {
-    stolenBikeCase: new DataSource(declarationMapper),
+    stolenBikeCase: new DataSource(stolenBikeCasesMapper),
   },
   effects: {
     *fetchStolenBikeCases({ payload }, { call, put }) {
       try {
-       /* const { numero, frontPagination } = payload;
-        const declarations = new DataSource(declarationMapper, frontPagination);
+        debugger;
+        const { numero, frontPagination } = payload;
+        const declarations = new DataSource(stolenBikeCasesMapper, frontPagination);
         declarations.setData = yield call(
           fetchDeclarations,
           numero,
@@ -20,7 +21,7 @@ export default {
         yield put({
           type: 'stolenBikeCasesFetched',
           payload: declarations,
-        });*/
+        });
       } catch (e) {
         console.log(e);
       }

@@ -123,7 +123,7 @@ export default {
         },
         {
           path: '/stolenbike/cases',
-          name: 'stolenBike',
+          name: 'card-list',
           component: './stolenbike/search/index',
           Routes: ['src/pages/Authorized'],
         },

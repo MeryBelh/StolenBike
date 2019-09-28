@@ -15,6 +15,7 @@ export default class DataTable extends PureComponent {
     } = this.props;
 
     const indexedData = data.map((item, index) => ({ ...item, key: index}))
+    debugger;
     const columns = metadata.map((column, key) => {
       return {
         ...column,
