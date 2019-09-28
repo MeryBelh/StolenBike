@@ -43,10 +43,10 @@ const Model: ModelType = {
       ? { status: 'ok', currentAuthority: 'admin' }
       : { status: 'error', currentAuthority: 'guest' };
         
-      if (policeOfficer.length !== 0) {
-        yield persistTokenInformation(policeOfficer);
+      if (result.status === 'ok') {
+        yield persistTokenInformation(policeOfficer[0]);
         reloadAuthorized();
-        yield router.push('/');
+        yield router.push('/stolenbike/cases');
       }
       yield put({
         type: 'changeLoginStatus',

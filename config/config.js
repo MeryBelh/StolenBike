@@ -103,8 +103,6 @@ export default {
     {
       path: '/',
       component: '../layouts/BasicLayout',
-      //Routes: ['src/pages/Authorized'],
-
       routes: [
         {
           path: '/',
@@ -121,6 +119,12 @@ export default {
         {
           path: '/police/login',
           component: './user/login/index',
+          Routes: ['src/pages/Authorized'],
+        },
+        {
+          path: '/stolenbike/cases',
+          name: 'stolenBike',
+          component: './stolenbike/search/index',
           Routes: ['src/pages/Authorized'],
         },
            

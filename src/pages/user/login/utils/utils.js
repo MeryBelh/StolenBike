@@ -8,11 +8,10 @@ function* persistTokenInformation(token) {
 
   const { id, login } = token;
 
-
   yield localStorage.setItem('access-token', JSON.stringify(id));
   yield localStorage.setItem(
     'token-valid-until',
-    JSON.stringify(moment().valueOf() + expires_in * 1000),
+    JSON.stringify(moment().valueOf() + 10000),
   );
 }
 
