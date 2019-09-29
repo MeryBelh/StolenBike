@@ -1,5 +1,5 @@
 import DataSource from '../../utils/DataSource';
-import { fetchTaches } from '@/services/tache';
+import { fetchTaches, asignTask } from '@/services/tache';
 import tacheMapper from '../../mappers/tacheMapper';
 
 export default {
@@ -18,6 +18,18 @@ export default {
           type: 'tachesFetched',
           payload: taches,
         });
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    *asignTask({ payload }, { call, put }) {
+      try {
+        payload = {
+          ...payload,
+          policeId: '1',
+        };
+        yield call(addStolenBike, payload);
+        // yield put({ type: 'PecIdFetched', payload: pecId });
       } catch (e) {
         console.log(e);
       }

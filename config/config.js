@@ -124,10 +124,15 @@ export default {
         {
           path: '/stolenbike/cases',
           name: 'card-list',
-          component: './stolenbike/search/index',
+          component: './taches/index',
           Routes: ['src/pages/Authorized'],
         },
-           
+        /*{
+          path: '/stolenbike/cases/:numero',
+          component: './taches/$numero/index',
+         // Routes: ['src/pages/Authorized'],
+          //authority: ['admin'],
+        },*/
       ],
     },
   ],
@@ -143,13 +148,13 @@ export default {
     'layout-sider-background': '#00182E',
     'layout-body-background': '#f0f2f5',
   },
- proxy: {
-   '/server/api/': {
-       target: 'https://localhost:3000',
-       changeOrigin: true,
-       pathRewrite: { '^/server': '' },
-   },
- },
+  proxy: {
+    '/server/api/': {
+      target: 'https://localhost:3000',
+      changeOrigin: true,
+      pathRewrite: { '^/server': '' },
+    },
+  },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,

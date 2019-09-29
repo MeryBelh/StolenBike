@@ -27,8 +27,9 @@ const isAntDesignProOrDev = () => {
 };
 
 const applyPolicy = fields => {
+  debugger;
   const authority = getAuthority();
-  if(!authority) return []
+  //if(!authority) return []
   return fields.filter(
     field =>
       !(field.deniedFor && field.deniedFor.filter(denied => authority.includes(denied)).length > 0),
