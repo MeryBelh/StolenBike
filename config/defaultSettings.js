@@ -10,7 +10,7 @@ export default {
   menu: {
     locale: true,
   },
-  title: 'Stolen bikes',
+  title: 'Stolen Bike',
   pwa: false,
   iconfontUrl: '',
 };

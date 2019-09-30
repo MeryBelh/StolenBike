@@ -6,7 +6,7 @@
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { connect } from 'dva';
 import React, { useState } from 'react';
-import logo from '../assets/logo-wafa.png';
+import logo from '../assets/bike.svg';
 import Authorized from '@/utils/Authorized';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { BasicLayout as ProLayoutComponents } from '@ant-design/pro-layout';

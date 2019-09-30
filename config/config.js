@@ -190,6 +190,6 @@ export default {
   },
   uglifyJSOptions,
   chainWebpack: webpackPlugin,
-  base: '/dimapp/',
-  publicPath: '/dimapp/',
+  base: '/stolenbike/',
+  publicPath: '/stolenbike/',
 };
