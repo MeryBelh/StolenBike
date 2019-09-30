@@ -1,9 +1,9 @@
-import { addStolenBike } from '../../services/stolenBike';
+import { addStolenBike } from '../../../services/stolenBike';
 
 export default {
   namespace: 'stolenBikes',
   state: {
-    //reglementsBloque: new DataSource(reglementBloqueMapper),
+    stolenBikes: [],
   },
   effects: {
     *add({ payload }, { call, put }) {
@@ -25,7 +25,7 @@ export default {
     reglementsBloqueFetched(state, action) {
       return {
         ...state,
-        reglementsBloque: action.payload,
+        stolenBikes: action.payload,
       };
     },
   },

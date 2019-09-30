@@ -1,19 +1,21 @@
 import React from 'react';
 
 import { Col, Row } from 'antd';
-import haut from '@/assets/stolen-bike.jpg';
-import wafaSanteImg from '@/assets/WafaSante.png';
+import styled from '@emotion/styled';
+
 
 class Welcome extends React.Component {
   render() {
     return (
-      <Row gutter={24} style={{ textAlign: 'center',width: '98%' }}>
-        <div style={{ textAlign: 'center', width: '94%', marginBottom: '2%' }}>
-          <img alt="" src={haut} style={{ width: '100%'}} />
-        </div>
-      </Row>
+      <div>
+         <h3>Stolen bike cases</h3>
+         <Col span={8}>
+              TODO
+            </Col></div>
+         
     );
   }
 }
 
 export default Welcome;
+

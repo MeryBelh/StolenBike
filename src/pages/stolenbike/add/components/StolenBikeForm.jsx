@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Form } from 'antd';
-import Page from '../../../components/Page';
+import Page from '../../../../components/Page';
 import styled from '@emotion/styled';
 import { Button, Col, Input, Row, Select, DatePicker } from 'antd';
+import router from 'umi/router';
+
 
 const { Item } = Form;
 const { TextArea } = Input;
@@ -27,12 +29,9 @@ export default class StolenBikeForm extends Component {
                 ...values,
               },
             });
+            router.push(`/`);
           }
         });
-      };
-
-      values = values => {
-
       };
 
     render() {
@@ -43,7 +42,8 @@ export default class StolenBikeForm extends Component {
           
         return (
           <Page inner>
-           
+           <h3>Report your stolen bike : </h3>
+
            <Form  onSubmit={this.handleSubmit}>
            <Bloc>
                 <Row>

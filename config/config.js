@@ -114,7 +114,8 @@ export default {
           path: '/stolenbike',
           name: 'stolenBike',
           icon: 'warning',
-          component: './stolenbike/index',
+          component: './stolenbike/add/index',
+          //authority: ['admin'],
         },
         {
           path: '/police/login',
