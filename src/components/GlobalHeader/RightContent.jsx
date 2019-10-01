@@ -8,8 +8,26 @@ import styles from './index.less';
 import { connect } from 'dva';
 import { deleteTokenInformation } from '../../pages/user/login/utils/utils';
 import router from 'umi/router';
+import { getAuthority } from '@/utils/authority';
 
 class GlobalHeaderRight extends Component {
+  renderMessage = () => {
+    const isLogin = getAuthority().includes('admin');
+    return isLogin ? 'Police Logout' : 'Police Login';
+  };
+
+  handleAuthentication = () => {
+    const isLogin = getAuthority().includes('admin');
+    if (isLogin) {
+      deleteTokenInformation();
+      window.location.reload();
+      setTimeout(() => router.push('/'), 1000);
+      return;
+    } else {
+      setTimeout(() => router.push('/police/login'), 1000);
+    }
+  };
+
   render() {
     const { theme, layout } = this.props;
     let className = styles.right;
@@ -21,17 +39,12 @@ class GlobalHeaderRight extends Component {
     return (
       <div className={className}>
         {/* <Avatar /> */}
-         {/*<NoticeIcon />*/}
+        {/*<NoticeIcon />*/}
         <SelectLang className={styles.action} />
-        <Button onClick={this.policeLogin}>Police login</Button>
+        <Button onClick={this.handleAuthentication}>{this.renderMessage()}</Button>
       </div>
     );
   }
-
-  policeLogin = () => {
-   // deleteTokenInformation();
-    setTimeout(() => router.push('/police/login'), 1000);
-  };
 }
 
 export default connect(({ settings }) => ({

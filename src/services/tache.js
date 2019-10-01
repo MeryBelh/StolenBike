@@ -1,12 +1,21 @@
 import request from '@/utils/request';
 
 export function fetchTaches(paginationQuery) {
-  return request()(`/bikes`);
+  const policeId = localStorage.getItem('access-token') || 0;
+  return request()(`/stolenbike/policecase/` + policeId);
 }
 
 export function asignTask(queryCommand) {
   return request()('/asignTask', {
     method: 'POST',
+    body: JSON.stringify(queryCommand),
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
+export function solveCase(queryCommand) {
+  return request()('/stolenbike/solvecase', {
+    method: 'PUT',
     body: JSON.stringify(queryCommand),
     headers: { 'Content-Type': 'application/json' },
   });

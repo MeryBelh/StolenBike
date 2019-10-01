@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Table } from 'antd';
 
 export default class DataTable extends PureComponent {
-
   handleTableChange = (pagination, filters, sorter) => {
     const { onChange } = this.props;
     if (onChange) onChange(pagination);
@@ -14,8 +13,7 @@ export default class DataTable extends PureComponent {
       actionColumns,
     } = this.props;
 
-    const indexedData = data.map((item, index) => ({ ...item, key: index}))
-    debugger;
+    const indexedData = data ? data.map((item, index) => ({ ...item, key: index })) : [];
     const columns = metadata.map((column, key) => {
       return {
         ...column,
@@ -32,6 +30,7 @@ export default class DataTable extends PureComponent {
 
     return (
       <Table
+        bordered
         dataSource={indexedData}
         columns={columns}
         onChange={this.handleTableChange}
@@ -39,6 +38,4 @@ export default class DataTable extends PureComponent {
       />
     );
   }
-
-
 }

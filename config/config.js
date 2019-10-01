@@ -111,22 +111,21 @@ export default {
           component: './accueil/Welcome',
         },
         {
-          path: '/stolenbike',
+          path: '/report',
           name: 'stolenBike',
           icon: 'warning',
           component: './stolenbike/add/index',
-          //authority: ['admin'],
+          authority: ['guest'],
         },
         {
           path: '/police/login',
           component: './user/login/index',
-          Routes: ['src/pages/Authorized'],
         },
         {
           path: '/stolenbike/cases',
-          name: 'card-list',
+          name: 'tasks',
           component: './taches/index',
-          Routes: ['src/pages/Authorized'],
+          authority: ['admin'],
         },
         /*{
           path: '/stolenbike/cases/:numero',

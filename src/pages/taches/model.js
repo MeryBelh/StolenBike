@@ -1,6 +1,7 @@
 import DataSource from '../../utils/DataSource';
-import { fetchTaches, asignTask } from '@/services/tache';
+import { fetchTaches, solveCase } from '@/services/tache';
 import tacheMapper from '../../mappers/tacheMapper';
+import { debug } from 'webpack';
 
 export default {
   namespace: 'tachesModel',
@@ -11,7 +12,6 @@ export default {
     *fetchTaches({ payload }, { call, put }) {
       try {
         const { frontPagination } = payload;
-        console.log('frontPagination', frontPagination);
         const taches = new DataSource(tacheMapper, frontPagination);
         taches.setData = yield call(fetchTaches, taches.getPaginationQueryString());
         yield put({
@@ -22,14 +22,14 @@ export default {
         console.log(e);
       }
     },
-    *asignTask({ payload }, { call, put }) {
+    *solvecase({ payload }, { call, put }) {
       try {
         payload = {
           ...payload,
-          policeId: '1',
+          policeId: localStorage.getItem('access-token') || 0,
         };
-        yield call(addStolenBike, payload);
-        // yield put({ type: 'PecIdFetched', payload: pecId });
+        yield call(solveCase, payload);
+        yield put({ type: 'caseSolved', payload: payload });
       } catch (e) {
         console.log(e);
       }
@@ -41,6 +41,12 @@ export default {
       return {
         ...state,
         taches: action.payload,
+      };
+    },
+    caseSolved(state, action) {
+      state.taches.data.filter(item => item.id !== action.payload.bikeId);
+      return {
+        ...state,
       };
     },
   },
