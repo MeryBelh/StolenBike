@@ -1,7 +1,6 @@
 import DataSource from '../../utils/DataSource';
 import { fetchTaches, solveCase } from '@/services/tache';
 import tacheMapper from '../../mappers/tacheMapper';
-import { debug } from 'webpack';
 
 export default {
   namespace: 'tachesModel',
@@ -44,9 +43,16 @@ export default {
       };
     },
     caseSolved(state, action) {
-      state.taches.data.filter(item => item.id !== action.payload.bikeId);
+      let index = state.taches.data.findIndex(item => item.id === action.payload.bikeId);
+
+      let stateTemp = new DataSource(tacheMapper, 0);
+      stateTemp.data = [
+        ...state.taches.data.slice(0, index),
+        ...state.taches.data.slice(index + 1),
+      ];
       return {
         ...state,
+        taches: stateTemp,
       };
     },
   },

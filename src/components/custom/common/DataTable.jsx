@@ -14,15 +14,17 @@ export default class DataTable extends PureComponent {
     } = this.props;
 
     const indexedData = data ? data.map((item, index) => ({ ...item, key: index })) : [];
-    const columns = metadata.map((column, key) => {
-      return {
-        ...column,
-        title: column.label,
-        dataIndex: column.name,
-        key,
-        sorter: (a, b) => (a.statut > b.statut ? 1 : -1),
-      };
-    });
+    const columns = metadata
+      ? metadata.map((column, key) => {
+          return {
+            ...column,
+            title: column.label,
+            dataIndex: column.name,
+            key,
+            sorter: (a, b) => (a.statut > b.statut ? 1 : -1),
+          };
+        })
+      : [];
     if (actionColumns)
       actionColumns.forEach(actionColumn => {
         columns.push(actionColumn);
