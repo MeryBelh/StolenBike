@@ -12,7 +12,7 @@ const tacheMapper = [
     label: 'Status',
     dataIndex: 'resolved',
     render: (text, record) => (
-      <span>
+        <span>
         <a>{record.resolved}</a>
         <Tag color={record.resolved ? 'green' : 'red'} key={'value'}>
           {record.resolved ? 'resolved' : 'unresolved'}
@@ -20,7 +20,6 @@ const tacheMapper = [
       </span>
     ),
   },
-  //  render: text => <a>{text==='value'}</a>,},
 ];
 
 export default tacheMapper;

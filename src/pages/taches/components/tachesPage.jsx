@@ -12,13 +12,22 @@ class TachesPage extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    this.fetchTachesNonAffecte();
+    this.fetchTachesInProgress();
+    this.fetchTachesNonAffected();
   }
 
-  fetchTachesNonAffecte = (frontPagination = {}) => {
+  fetchTachesInProgress = (frontPagination = {}) => {
     const { dispatch } = this.props;
     dispatch({
       type: `${this.model}/fetchTaches`,
+      payload: { frontPagination },
+    });
+  };
+
+  fetchTachesNonAffected = (frontPagination = {}) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: `${this.model}/fetchTachesNonAffected`,
       payload: { frontPagination },
     });
   };
@@ -41,7 +50,7 @@ class TachesPage extends React.Component {
   };
 
   render() {
-    const { taches, dispatch } = this.props;
+    const { taches, tachesNonAffecte, dispatch } = this.props;
     const taskActionColumns = [
       {
         name: 'action',
@@ -58,7 +67,7 @@ class TachesPage extends React.Component {
         </TabPane>
         <TabPane tab="unresolved tasks :" key="2">
           <h2 className={styles.centerHeader}>Unresolved tasks : </h2>
-          <DataTable dataSource={taches} />
+          {<DataTable dataSource={tachesNonAffecte} />}
         </TabPane>
         <TabPane tab="Tab 3" key="3">
           Content of Tab Pane 3

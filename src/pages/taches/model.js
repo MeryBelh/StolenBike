@@ -1,11 +1,12 @@
 import DataSource from '../../utils/DataSource';
-import { fetchTaches, solveCase } from '@/services/tache';
+import { fetchTaches, fetchTachesNonAffected, solveCase } from '@/services/tache';
 import tacheMapper from '../../mappers/tacheMapper';
 
 export default {
   namespace: 'tachesModel',
   state: {
     taches: new DataSource(tacheMapper),
+    tachesNonAffecte: new DataSource(tacheMapper),
   },
   effects: {
     *fetchTaches({ payload }, { call, put }) {
@@ -16,6 +17,19 @@ export default {
         yield put({
           type: 'tachesFetched',
           payload: taches,
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    *fetchTachesNonAffected({ payload }, { call, put }) {
+      try {
+        const { frontPagination } = payload;
+        const tachesNonAffecte = new DataSource(tacheMapper, frontPagination);
+        tachesNonAffecte.setData = yield call(fetchTachesNonAffected, tachesNonAffecte.getPaginationQueryString());
+        yield put({
+          type: 'tachesNonAffecteFetched',
+          payload: tachesNonAffecte,
         });
       } catch (e) {
         console.log(e);
@@ -40,6 +54,12 @@ export default {
       return {
         ...state,
         taches: action.payload,
+      };
+    },
+    tachesNonAffecteFetched(state, action) {
+      return {
+        ...state,
+        tachesNonAffecte: action.payload,
       };
     },
     caseSolved(state, action) {

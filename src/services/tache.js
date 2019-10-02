@@ -5,6 +5,10 @@ export function fetchTaches(paginationQuery) {
   return request()(`/stolenbike/policecase/` + policeId);
 }
 
+export function fetchTachesNonAffected(paginationQuery) {
+  return request()(`/stolenbike/unresolvedcases`);
+}
+
 export function asignTask(queryCommand) {
   return request()('/asignTask', {
     method: 'POST',
