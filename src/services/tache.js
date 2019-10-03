@@ -10,7 +10,7 @@ export function fetchTachesNonAffected(paginationQuery) {
 }
 
 export function asignTask(queryCommand) {
-  return request()('/asignTask', {
+  return request()('/stolenbike/unresolvedcases', {
     method: 'POST',
     body: JSON.stringify(queryCommand),
     headers: { 'Content-Type': 'application/json' },

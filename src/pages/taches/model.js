@@ -1,5 +1,5 @@
 import DataSource from '../../utils/DataSource';
-import { fetchTaches, fetchTachesNonAffected, solveCase } from '@/services/tache';
+import { fetchTaches, fetchTachesNonAffected, solveCase, asignTask } from '@/services/tache';
 import tacheMapper from '../../mappers/tacheMapper';
 
 export default {
@@ -26,7 +26,10 @@ export default {
       try {
         const { frontPagination } = payload;
         const tachesNonAffecte = new DataSource(tacheMapper, frontPagination);
-        tachesNonAffecte.setData = yield call(fetchTachesNonAffected, tachesNonAffecte.getPaginationQueryString());
+        tachesNonAffecte.setData = yield call(
+          fetchTachesNonAffected,
+          tachesNonAffecte.getPaginationQueryString(),
+        );
         yield put({
           type: 'tachesNonAffecteFetched',
           payload: tachesNonAffecte,
@@ -43,6 +46,19 @@ export default {
         };
         yield call(solveCase, payload);
         yield put({ type: 'caseSolved', payload: payload });
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    *asignTask({ payload }, { call, put }) {
+      try {
+        payload = {
+          ...payload,
+          policeId: localStorage.getItem('access-token') || 0,
+          resolved: 0,
+        };
+        yield call(asignTask, payload);
+        yield put({ type: 'taskAsigned', payload: payload });
       } catch (e) {
         console.log(e);
       }
@@ -73,6 +89,27 @@ export default {
       return {
         ...state,
         taches: stateTemp,
+      };
+    },
+    taskAsigned(state, action) {
+      //delete from tachesNonAffecte
+      let index = state.tachesNonAffecte.data.findIndex(item => item.id === action.payload.bikeId);
+
+      let asignedTask = state.tachesNonAffecte.data[index];
+
+      let nonAffectedTasks = new DataSource(tacheMapper, 0);
+      nonAffectedTasks.data = [
+        ...state.tachesNonAffecte.data.slice(0, index),
+        ...state.tachesNonAffecte.data.slice(index + 1),
+      ];
+
+      //add the one on the tasks
+      let affectedTasks = new DataSource(tacheMapper, 0);
+      affectedTasks.data = [...state.taches.data, asignedTask];
+      return {
+        ...state,
+        taches: affectedTasks,
+        tachesNonAffecte: nonAffectedTasks,
       };
     },
   },

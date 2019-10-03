@@ -34,6 +34,23 @@ class TachesPage extends React.Component {
 
   bikeSubimttedInfo = (bike, dispatch) => {
     Modal.info({
+      title: 'case resolved  ',
+      content: (
+        <div>
+          <p> Stolen case mark as resolved </p>
+        </div>
+      ),
+      onOk() {
+        dispatch({
+          type: `tachesModel/solvecase`,
+          payload: { bikeId: bike.id },
+        });
+      },
+    });
+  };
+
+  asignTask = (bike, dispatch) => {
+    Modal.info({
       title: 'Stolen case asigned  ',
       content: (
         <div>
@@ -42,7 +59,7 @@ class TachesPage extends React.Component {
       ),
       onOk() {
         dispatch({
-          type: `tachesModel/solvecase`,
+          type: `tachesModel/asignTask`,
           payload: { bikeId: bike.id },
         });
       },
@@ -59,6 +76,15 @@ class TachesPage extends React.Component {
         },
       },
     ];
+
+    const nonAffectedTaskActionColumns = [
+      {
+        name: 'action',
+        render: (id, obj) => {
+          return <a onClick={this.asignTask.bind(this, id, dispatch)}>asign task</a>;
+        },
+      },
+    ];
     return (
       <Tabs defaultActiveKey="1" type="card">
         <TabPane tab="My tasks" key="1">
@@ -67,10 +93,7 @@ class TachesPage extends React.Component {
         </TabPane>
         <TabPane tab="unresolved tasks :" key="2">
           <h2 className={styles.centerHeader}>Unresolved tasks : </h2>
-          {<DataTable dataSource={tachesNonAffecte} />}
-        </TabPane>
-        <TabPane tab="Tab 3" key="3">
-          Content of Tab Pane 3
+          <DataTable dataSource={tachesNonAffecte} actionColumns={nonAffectedTaskActionColumns} />
         </TabPane>
       </Tabs>
     );
