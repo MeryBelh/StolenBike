@@ -10,7 +10,6 @@ export default {
   effects: {
     *fetchStolenBikeCases({ payload }, { call, put }) {
       try {
-        debugger;
         const { numero, frontPagination } = payload;
         const declarations = new DataSource(stolenBikeCasesMapper, frontPagination);
         declarations.setData = yield call(

@@ -1,17 +1,16 @@
 import React from 'react';
+import { Modal, Tabs } from 'antd';
+
+
 import DataTable from '@/components/custom/common/DataTable';
 import styles from '../index.less';
 
-import { Link } from 'react-router-dom';
-import { getAuthority } from '../../../utils/authority';
-import { Button, Modal, Tabs } from 'antd';
 const { TabPane } = Tabs;
 
 class TachesPage extends React.Component {
   model = 'tachesModel';
 
   componentDidMount() {
-    const { dispatch } = this.props;
     this.fetchTachesInProgress();
     this.fetchTachesNonAffected();
   }
@@ -43,7 +42,7 @@ class TachesPage extends React.Component {
       onOk() {
         dispatch({
           type: `tachesModel/solvecase`,
-          payload: { bikeId: bike.id },
+          payload: { bikeId: bike.bikeID || bike.id },
         });
       },
     });
@@ -71,7 +70,7 @@ class TachesPage extends React.Component {
     const taskActionColumns = [
       {
         name: 'action',
-        render: (id, obj) => {
+        render: (id) => {
           return <a onClick={this.bikeSubimttedInfo.bind(this, id, dispatch)}>Mark as resolved</a>;
         },
       },
@@ -80,7 +79,7 @@ class TachesPage extends React.Component {
     const nonAffectedTaskActionColumns = [
       {
         name: 'action',
-        render: (id, obj) => {
+        render: (id) => {
           return <a onClick={this.asignTask.bind(this, id, dispatch)}>asign task</a>;
         },
       },
@@ -91,7 +90,7 @@ class TachesPage extends React.Component {
           <h2 className={styles.centerHeader}>My tasks : </h2>
           <DataTable dataSource={taches} actionColumns={taskActionColumns} />
         </TabPane>
-        <TabPane tab="unresolved tasks :" key="2">
+        <TabPane tab="Unresolved tasks :" key="2">
           <h2 className={styles.centerHeader}>Unresolved tasks : </h2>
           <DataTable dataSource={tachesNonAffecte} actionColumns={nonAffectedTaskActionColumns} />
         </TabPane>

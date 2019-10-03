@@ -1,11 +1,11 @@
 import request from '@/utils/request';
 
-export function fetchTaches(paginationQuery) {
+export function fetchTaches() {
   const policeId = localStorage.getItem('access-token') || 0;
-  return request()(`/stolenbike/policecase/` + policeId);
+  return request()(`/stolenbike/policecase/${  policeId}`);
 }
 
-export function fetchTachesNonAffected(paginationQuery) {
+export function fetchTachesNonAffected() {
   return request()(`/stolenbike/unresolvedcases`);
 }
 

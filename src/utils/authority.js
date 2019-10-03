@@ -1,5 +1,5 @@
 // use localStorage to store the authority info, which might be sent from server in actual project.
-export function getAuthority(str) {
+export function getAuthority() {
   return localStorage.getItem('access-token') ? ['admin'] : ['guest'];
 }
 export function setAuthority(authority) {

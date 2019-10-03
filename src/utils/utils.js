@@ -14,7 +14,7 @@ const isAntDesignPro = () => {
   }
 
   return window.location.hostname === 'preview.pro.ant.design';
-}; // 给官方演示站点用，用于关闭真实开发环境不需要使用的特性
+}; 
 
 const isAntDesignProOrDev = () => {
   const { NODE_ENV } = process.env;
@@ -27,9 +27,7 @@ const isAntDesignProOrDev = () => {
 };
 
 const applyPolicy = fields => {
-  debugger;
   const authority = getAuthority();
-  //if(!authority) return []
   return fields.filter(
     field =>
       !(field.deniedFor && field.deniedFor.filter(denied => authority.includes(denied)).length > 0),

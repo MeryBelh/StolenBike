@@ -1,19 +1,19 @@
 import 'jest';
 import { getAuthority } from './authority';
+
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  clear: jest.fn()
+};
+global.localStorage = localStorageMock;
+
 describe('getAuthority should be strong', () => {
-  it('empty', () => {
-    expect(getAuthority(null)).toEqual(null); // default value
+
+  expect(localStorage.getItem.mock.calls.length).toBe(0);
+
+   it('empty', () => {
+    expect(getAuthority()).toEqual(['guest']); // default value
   });
-  it('string', () => {
-    expect(getAuthority('admin')).toEqual(['admin']);
-  });
-  it('array with double quotes', () => {
-    expect(getAuthority('"admin"')).toEqual(['admin']);
-  });
-  it('array with single item', () => {
-    expect(getAuthority('["admin"]')).toEqual(['admin']);
-  });
-  it('array with multiple items', () => {
-    expect(getAuthority('["admin", "guest"]')).toEqual(['admin', 'guest']);
-  });
+  
 });
